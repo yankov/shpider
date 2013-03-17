@@ -1,5 +1,7 @@
 *.DS_Store
 *.class
+*.classpath
+*.cache
 *.log
 
 # sbt specific
