@@ -9,8 +9,7 @@ import org.jsoup.select.Elements
 import java.net._
 
 // Filters links from given content
-class Filter extends Actor {
-  val fetcher = Router.fetcher
+class Filter extends Actor with ActorEnhancements {
 
   def receive = {
     case (link: String, html: String) => {
@@ -23,8 +22,9 @@ class Filter extends Actor {
 
       while (filteredLinks.hasNext()) {
         var href = filteredLinks.next().attr("href")
-        fetcher ! href
+        Router.fetcher ! href
       }
     }
+    case e => handleUnknownEvent(e)
   }
 }

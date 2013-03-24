@@ -20,3 +20,9 @@ libraryDependencies += "org.jsoup" % "jsoup" % "1.7.2"
 
 libraryDependencies += "com.typesafe.akka" % "akka-actor" % "2.0.5"
 
+libraryDependencies += "com.typesafe.akka" % "akka-slf4j" % "2.0.3" 
+ 
+libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.0.9"
+
+
+

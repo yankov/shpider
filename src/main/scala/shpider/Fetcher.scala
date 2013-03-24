@@ -4,9 +4,7 @@ import dispatch._
 import akka.actor.Actor
 
 // Fetches the content of the given URL
-class Fetcher extends Actor {
-  val filter = Router.filter
-  val reporter = Router.reporter
+class Fetcher extends Actor with ActorEnhancements {
 
   def receive = {
     case link: String => {
@@ -15,12 +13,13 @@ class Fetcher extends Actor {
       for (doc <- docFuture) {
         doc match {
           case Right(content) => {
-            filter ! (link, content)
-            reporter ! link
+            Router.filter ! (link, content)
+            Router.reporter ! link
           }
           case Left(StatusCode(code)) => {}
         }
       }
     }
+    case e => handleUnknownEvent(e)
   }
 }
