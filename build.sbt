@@ -4,6 +4,8 @@ resolvers += "apache" at "https://repository.apache.org/content/repositories/sna
 
 resolvers += "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/"
 
+resolvers += "Clojars" at "http://clojars.org/repo"
+
 name := "shpider"
 
 version := "1.0"
@@ -23,6 +25,8 @@ libraryDependencies += "com.typesafe.akka" % "akka-actor" % "2.0.5"
 libraryDependencies += "com.typesafe.akka" % "akka-slf4j" % "2.0.3" 
  
 libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.0.9"
+
+libraryDependencies += "storm" % "storm" % "0.8.2" % "provided"
 
 
 

@@ -4,7 +4,7 @@ import dispatch._
 import akka.actor.Actor
 
 // Fetches the content of the given URL
-class Fetcher extends Actor with ActorEnhancements {
+class Fetcher extends Actor with ActorEnhancements with akka.actor.ActorLogging {
 
   def receive = {
     case link: String => {
