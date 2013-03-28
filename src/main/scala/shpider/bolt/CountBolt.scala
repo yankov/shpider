@@ -17,7 +17,7 @@ class CountBolt extends BaseRichBolt {
   }
 
   override def execute(tuple: Tuple) {
-    _collector.emit(tuple, new Values(tuple.getString(0) + "!!!"))
+    _collector.emit(tuple, new Values(tuple.getString(0) + "HOHOSCALA"))
     _collector.ack(tuple)
   }
 

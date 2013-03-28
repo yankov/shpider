@@ -12,28 +12,39 @@ import backtype.storm.testing.TestWordSpout
 import backtype.storm.topology.TopologyBuilder
 import backtype.storm.tuple.Fields
 import backtype.storm.utils.Utils
-
+import storm.kafka._
 import shpider.bolt._
+import java.util.ArrayList
 
 object Shpider extends App {
   val system = ActorSystem("MySystem")
 
   val builder = new TopologyBuilder()
 
-  builder.setSpout("word", new TestWordSpout(), 10);
+  val kafkaBrokers = new ArrayList[HostPort]()
+  kafkaBrokers.add(new HostPort("localhost"))
+
+  val spoutConfig = new SpoutConfig(
+    new KafkaConfig.StaticHosts(kafkaBrokers, 1), // list of Kafka brokers
+    "urls", // topic to read from
+    "/kafkastorm", // the root path in Zookeeper for the spout to store the consumer offsets
+    "urlconsumer") // an id for this consumer for storing the consumer offsets in Zookeeper
+
+  builder.setSpout("urls", new KafkaSpout(spoutConfig), 1)
   builder.setBolt("count1", new ExclamationBolt(), 3)
-    .shuffleGrouping("word");
+    .shuffleGrouping("urls");
 
   val conf = new Config()
-  conf.setDebug(true);
+  conf.setDebug(true)
 
   val cluster = new LocalCluster()
-  cluster.submitTopology("test", conf, builder.createTopology());
-  Utils.sleep(10000);
-  cluster.killTopology("test");
-  cluster.shutdown();
+  //  cluster.submitTopology("test", conf, builder.createTopology())
 
   Router.fetcher ! "http://techcrunch.com"
+
+  Utils.sleep(10000)
+  //  cluster.killTopology("test")
+  cluster.shutdown()
 }
 
 object Router {
