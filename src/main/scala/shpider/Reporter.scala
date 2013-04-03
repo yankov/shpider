@@ -15,9 +15,8 @@ class Reporter extends Actor with ActorEnhancements {
 
   def receive = {
     case href: String => {
-      //      var messages = new ArrayList[String]()
-      //      messages.add(href)
-
+      // var messages = new ArrayList[String]()
+      // messages.add(href)
       val data = new ProducerData[String, String](topic, href)
       producer.send(data)
     }

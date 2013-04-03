@@ -28,9 +28,9 @@ libraryDependencies += "com.typesafe.akka" % "akka-slf4j" % "2.0.3"
  
 libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.0.9"
 
-libraryDependencies += "storm" % "storm" % "0.8.2" % "provided"
+libraryDependencies += "storm" % "storm" % "0.9.0-wip15"
 
-libraryDependencies += "storm" % "storm-kafka" % "0.9.0-wip15-scala292"
+libraryDependencies += "storm" % "storm-kafka" % "0.9.0-wip16a-scala292"
 
 
 
