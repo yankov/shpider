@@ -1,6 +1,7 @@
 package shpider.bolt;
 
 import java.util.Map;
+
 import redis.clients.jedis.Jedis;
 import backtype.storm.task.OutputCollector;
 import backtype.storm.task.TopologyContext;
@@ -23,8 +24,9 @@ public class CounterBolt extends BaseRichBolt {
 
 	@Override
 	public void execute(Tuple tuple) {
-		redis.incr("java");
-		System.out.println(tuple);
+		redis.incr("urls:counter");
+
+		redis.sadd("urls", tuple.getValue(0).toString());
 		_collector.emit(tuple, new Values(tuple));
 		_collector.ack(tuple);
 	}

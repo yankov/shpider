@@ -24,7 +24,7 @@ import backtype.storm.spout.SchemeAsMultiScheme
 object Shpider extends App {
   val system = ActorSystem("MySystem")
 
-  //  Router.fetcher ! "http://techcrunch.com"
+  Router.fetcher ! "http://techcrunch.com"
 
   val kafkaBrokers = new ArrayList[HostPort]()
   kafkaBrokers.add(new HostPort("localhost"))
@@ -34,6 +34,7 @@ object Shpider extends App {
     "urls", // topic to read from
     "/kafkastorm", // the root path in Zookeeper for the spout to store the consumer offsets
     "urlconsumer") // an id for this consumer for storing the consumer offsets in Zookeeper
+  spoutConfig.scheme = new SchemeAsMultiScheme(new StringScheme())
 
   val builder = new TopologyBuilder()
   builder.setSpout("urls", new KafkaSpout(spoutConfig), 1)
