@@ -13,6 +13,7 @@ class Fetcher extends Actor with ActorEnhancements with akka.actor.ActorLogging 
       for (doc <- docFuture) {
         doc match {
           case Right(content) => {
+            println(link)
             Router.filter ! (link, content)
             Router.reporter ! link
           }

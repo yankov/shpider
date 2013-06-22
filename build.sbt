@@ -14,24 +14,5 @@ version := "1.0"
 
 scalaVersion := "2.9.3"
 
-libraryDependencies += "redis.clients" % "jedis" % "2.1.0"
-
-libraryDependencies += "io.netty" % "netty" % "3.6.3.Final"
-
-libraryDependencies += "net.databinder.dispatch" % "dispatch-core_2.9.2" % "0.9.5"
-
-libraryDependencies += "org.jsoup" % "jsoup" % "1.7.2"
-
-libraryDependencies += "com.typesafe.akka" % "akka-actor" % "2.0.5"
-
-libraryDependencies += "com.typesafe.akka" % "akka-slf4j" % "2.0.3" 
- 
-libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.0.9"
-
-libraryDependencies += "storm" % "storm" % "0.9.0-wip15"
-
-libraryDependencies += "storm" % "storm-kafka" % "0.9.0-wip16a-scala292"
-
-
 
 
