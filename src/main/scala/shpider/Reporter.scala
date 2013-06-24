@@ -1,6 +1,6 @@
 package shpider
 
-import kafka.producer.{ Producer, ProducerConfig, ProducerData }
+import kafka.producer.{ProducerConfig, ProducerData, Producer}
 import akka.actor.Actor
 import java.util.{ Properties, ArrayList }
 
@@ -15,8 +15,6 @@ class Reporter extends Actor with ActorEnhancements {
 
   def receive = {
     case href: String => {
-      // var messages = new ArrayList[String]()
-      // messages.add(href)
       val data = new ProducerData[String, String](topic, href)
       producer.send(data)
     }

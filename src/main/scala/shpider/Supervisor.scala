@@ -9,8 +9,7 @@ import akka.actor.ActorInitializationException
  * This actor is used to override a default supervisorStrategy
  * for all it's child actors to prevent them from restarting as it
  * defined by default
- */
-//class Supervisor extends Actor {
+ *///class Supervisor extends Actor {
 //  override val supervisorStrategy = OneForOneStrategy() {
 //    case _: ActorInitializationException => Stop
 //    case _: ActorKilledException => Stop
@@ -31,3 +30,4 @@ import akka.actor.ActorInitializationException
 //    Await.result(future, timeout.duration)
 //  }
 //}
+
