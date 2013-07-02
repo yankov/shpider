@@ -6,10 +6,11 @@ import java.io.IOException
 import scala.concurrent.ExecutionContext.Implicits.global   // why do i need that for dispatch 0.10?
 
 // Fetches the content of the given URL
-class Fetcher extends Actor with ActorEnhancements with akka.actor.ActorLogging {
+class Fetcher extends Actor with ActorEnhancements with akka.actor.ActorLogging  {
+  import ShpiderProtocol._
 
   def receive = {
-    case link: String => {
+    case FetchTask(link, filter) => {
       try {
         val docFuture = Http(url(link) > as.String).either
 
@@ -17,7 +18,7 @@ class Fetcher extends Actor with ActorEnhancements with akka.actor.ActorLogging 
           doc match {
             case Right(content) => {
               println(link)
-              Router.filter ! (link, content)
+              filter ! Content(link, content)
               Router.reporter ! link
             }
 
